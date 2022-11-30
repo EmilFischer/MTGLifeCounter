@@ -14,7 +14,6 @@ class PlayerBox extends StatefulWidget {
 }
 
 class _PlayerBox extends State<PlayerBox> {
-
   int getTextOrientation() {
     var numOfPlayers = widget.numberOfPlayers;
     var playerNum = widget.playerNumber;

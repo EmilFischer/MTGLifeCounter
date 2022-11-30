@@ -3,8 +3,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'dart:developer';
 import 'playerBox.dart';
 import 'menu.dart';
+import 'package:wakelock/wakelock.dart';
 
 void main() {
+  Wakelock.toggle(enable: true);
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const
     MaterialApp(
@@ -34,11 +36,22 @@ class MainGrid extends StatefulWidget {
 }
 
 class _MainGrid extends State<MainGrid> {
+
+  int numberOfPlayers = 4;
+  void setNumberOfPlayers(int num) {
+    setState(() {
+      numberOfPlayers = num;
+    });
+  }
+
+  void resetLife() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
 
     var height = MediaQuery.of(context).size.height;
-    const numberOfPlayers = 4;
 
     return Scaffold(
       body: Stack (
@@ -52,27 +65,27 @@ class _MainGrid extends State<MainGrid> {
               StaggeredGridTile.extent(
                 crossAxisCellCount: numberOfPlayers > 2 ? 1 : 2,
                 mainAxisExtent: height * 0.5,
-                child: const PlayerBox(1, numberOfPlayers),
+                child: PlayerBox(1, numberOfPlayers),
               ),
               StaggeredGridTile.extent(
                 crossAxisCellCount: numberOfPlayers > 2 ? 1 : 2,
                 mainAxisExtent: height * 0.5,
-                child: const PlayerBox(2, numberOfPlayers),
+                child: PlayerBox(2, numberOfPlayers),
               ),
               StaggeredGridTile.extent(
                 crossAxisCellCount: numberOfPlayers > 3 ? 1 : 2,
                 mainAxisExtent: height * 0.5,
-                child: const PlayerBox(3, numberOfPlayers),
+                child: PlayerBox(3, numberOfPlayers),
               ),
               StaggeredGridTile.extent(
                 crossAxisCellCount: numberOfPlayers > 3 ? 1 : 2,
                 mainAxisExtent: height * 0.5,
-                child: const PlayerBox(4, numberOfPlayers),
+                child: PlayerBox(4, numberOfPlayers),
               ),
             ],
           ),
-          const Center(
-            child: Menu(),
+          Center(
+            child: Menu(setNumberOfPlayers, resetLife),
           )
         ],
       ),
