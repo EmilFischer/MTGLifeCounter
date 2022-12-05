@@ -6,8 +6,8 @@ import 'menu.dart';
 import 'package:wakelock/wakelock.dart';
 
 void main() {
-  Wakelock.toggle(enable: true);
   WidgetsFlutterBinding.ensureInitialized();
+  Wakelock.toggle(enable: true);
   runApp(const
     MaterialApp(
       home: MyApp(),
